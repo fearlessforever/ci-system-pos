@@ -1,0 +1,9 @@
+SetOutputFilter DEFLATE
+# Don't show directory listings for URLs which map to a directory.
+Options -Indexes
+
+RewriteEngine On
+RewriteBase /ci-system-pos/
+RewriteCond $1 !^(index\.php|images|publis|assets|sitemap\.xml|robots\.txt)
+RewriteRule ^(.*)$ /ci-system-pos/index.php/$1 [L]
+

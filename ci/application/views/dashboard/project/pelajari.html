@@ -1,0 +1,210 @@
+
+Time Left : <span class="time"></span>
+
+<pre>
+1.Who is the president indonesia in 2014-2015 period?<hr/>
+<input class="answer" name="answer" type="radio" value="A">Susilo Bambang Yudhiono
+<input class="answer" name="answer" type="radio" value="B">Megawati Soekarno Putri
+<input class="answer" name="answer" type="radio" value="C">Joko Widodo
+<input class="answer" name="answer" type="radio" value="D">Ir.Soekarno
+</pre>
+
+
+SELECT ke.referenced_table_name parent, ke.table_name child, ke.constraint_name FROM information_schema.KEY_COLUMN_USAGE ke WHERE ke.referenced_table_name IS NOT NULL ORDER BY ke.referenced_table_name
+^^^^ untuk check apakah suatu table berelasi
+
+
+https://www.facebook.com/SBYudhoyono/posts/940176109381664
+
+untuk buat auto melar textarea
+
+<form id="postData" name="postData">
+<b>Artikel:</b><br />
+<textarea class="autoheight" rows="2"><br />
+<input type="submit" value="Simpan">
+</form>
+
+#JQuery_lines:
+
+$('#postData').on('change keyup keydown paste cut mouseover', 'textarea.autoheight', function(){ $(this).height(0).height(this.scrollHeight); }).find('textarea').change();
+
+
+$untuku=$mysqli->query("select jenis_pembayaran from detail_transaksi where invoice='$invoice'");
+$i=0;
+while($untukua=$untuku->fetch_array()){
+$untuk[$i] =$untukua['jenis_pembayaran'];
+$i++;
+}
+$buat=implode(', ', $untuk) ;
+$pdf->Cell(70,7,strtoupper($buat),0,1,'J');
+
+http://wenzhixin.net.cn/p/multiple-select/docs/#the-basics1  <<<< untuk buat multi select model fb menu turun terus checkbox
+
+http://basicprimitives.com/
+
+Load javascript secara dynamic
+
+Here's the correct way to do it with modern (2014) JQuery:
+
+$(function () {
+  $('<script>')
+    .attr('type', 'text/javascript')
+    .text('some script here')
+    .appendTo('head');
+})
+
+or if you really want to replace a div you could do:
+
+$(function () {
+  $('<script>')
+    .attr('type', 'text/javascript')
+    .text('some script here')
+    .replaceAll('#someelement');
+});
+
+
+atau ini
+
+<script type="text/javascript">
+// Use any event to append the code
+$(document).ready(function() 
+{
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "http://scriptlocation/das.js";
+    // Use any selector
+    $("head").append(s);
+});
+
+
+
+
+
+<script>
+
+
+$(document).ready(function () {
+    choice = 0; // give 0 if no answer selected
+    $('.answer').click(function () {
+        choice = $(this).val();
+    });
+
+    var timeLeft = 5; // set time left for 5 *second | fill (60) for 1 minutes
+    var save = setInterval(function () {
+        $('.time').html(timeLeft);
+        timeLeft--;
+        if (timeLeft < 0) {
+            clearInterval(save);
+            $('.answer').prop('disabled', true);
+            alert(choice);
+            // you can insert ajax request for saving data to your database.
+        }
+    }, 1000)
+});
+
+function setUpUrl(e){
+  $(".nav li").removeClass("active");
+  $('.nav li:has(a[href="'+e+'"])').addClass("active").parent().show();
+  if($('.nav li:has(a[href="'+e+'"])').find("ul").size()!=0){
+     $(".opened").removeClass("opened");
+	 $('.nav a[href="'+e+'"]').parents("li").add(this).each(function(){
+	     $(this).addClass("opened")
+	 });
+	 $(".nav li").each(function(){
+	     $(this).hasClass("opened")||$(this).find("ul").slideUp()})
+   }
+  loadPage(e)
+  }
+function loadPage(e){
+    $.ajax(
+	 { type:"GET",
+	   url:$.subPagesDirectory+e,
+	   dataType:"html",
+	   cache:!1,
+	   async:!1,
+	   beforeSend:function(){
+	      $.mainContent.css({opacity:0})
+		  },
+	   success:function(){
+	      Pace.restart();
+		  $("html, body").animate({scrollTop:0},0);
+		  $.mainContent.load(
+		    $.subPagesDirectory+e,null,function(t){window.location.hash=e}
+			).delay(250).animate({opacity:1},750)
+		},error:function(){window.location.href=$.page404}}
+	)};
+	$.ajaxLoad=!0;
+	$.defaultPage="dashboard.html";
+	$.subPagesDirectory="pages/";
+	$.page404="page-404.html";
+	$.mainContent=$(".main");
+	$.panelIconOpened="icon-arrow-up";
+	$.panelIconClosed="icon-arrow-down";
+	var cssArray={};
+	if($.ajaxLoad){
+	  paceOptions={elements:!1,restartOnRequestAfter:!1};
+	  url=location.hash.replace(/^#/,"");
+	  url!=""?setUpUrl(url):setUpUrl($.defaultPage);
+	  $(document).on("click",'.nav a[href!="#"]',function(e){
+	    if($(this).parent().parent().hasClass("nav-tabs")||$(this).parent().parent().hasClass("nav-pills"))
+		 e.preventDefault();
+		else if($(this).attr("target")=="_top"){
+		 e.preventDefault();
+		 $this=$(e.currentTarget);
+		 window.location=$this.attr("href")
+		}else if($(this).attr("target")=="_blank"){
+		 e.preventDefault();
+		 $this=$(e.currentTarget);
+		 window.open($this.attr("href"))
+		}else{
+		 e.preventDefault();
+		 var t=$(e.currentTarget);
+		 setUpUrl(t.attr("href"))}});
+		 $(document).on("click",'a[href="#"]',function(e){
+		   e.preventDefault()})
+	}
+	$(document).ready(function(e){
+	   e("body").hasClass("rtl")&&loadCSS("assets/css/bootstrap-rtl.min.css",loadCSS("assets/css/style.rtl.min.css",1,0));
+	   e("#clock").length&&startTime();
+	   e("ul.nav-sidebar").find("a").each(function(){
+	     var t=String(window.location);
+		 t.substr(t.length-1)=="#"&&(t=t.slice(0,-1));
+		 if(e(e(this))[0].href==t){
+		   e(this).parent().addClass("active");
+		   e(this).parents("ul").add(this).each(function(){
+		     e(this).show().parent().addClass("opened")})
+			}
+		});
+	  e(".nav-sidebar").on("click","a",function(t){
+	    e.ajaxLoad&&t.preventDefault();
+		if(!e(this).parent().hasClass("hover"))
+		 if(e(this).parent().find("ul").size()!=0){
+		    e(this).parent().hasClass("opened")?e(this).parent().removeClass("opened"):e(this).parent().addClass("opened");
+			e(this).parent().find("ul").first().slideToggle("slow",function(){dropSidebarShadow()});
+			e(this).parent().parent().find("ul").each(function(){e(this).parent().hasClass("opened")||e(this).slideUp()});
+			e(this).parent().parent().parent().hasClass("opened")||e(".nav a").not(this).parent().find("ul").slideUp("slow",function(){e(this).parent().removeClass("opened").find(".opened").each(function(){e(this).removeClass("opened")})})
+		}else e(this).parent().parent().parent().hasClass("opened")||e(".nav a").not(this).parent().find("ul").slideUp("slow",function(){e(this).parent().removeClass("opened").find(".opened").each(function(){e(this).removeClass("opened")})})
+	});
+	e(".nav-sidebar > li").hover(
+	  function(){e("body").hasClass("sidebar-minified")&&e(this).addClass("opened hover")},
+	  function(){e("body").hasClass("sidebar-minified")&&e(this).removeClass("opened hover")}
+	 );
+	e("#main-menu-toggle").click(function(){
+	 e("body").hasClass("sidebar-hidden")?e("body").removeClass("sidebar-hidden"):e("body").addClass("sidebar-hidden")}
+	);
+	e("#sidebar-menu").click(function(){e(".sidebar").trigger("open")});
+	e("#sidebar-minify").click(function(){
+	  if(e("body").hasClass("sidebar-minified")){
+	      e("body").removeClass("sidebar-minified");
+		  e("#sidebar-minify i").removeClass("fa-list").addClass("fa-ellipsis-v")
+	 }else{
+	      e("body").addClass("sidebar-minified");
+		  e("#sidebar-minify i").removeClass("fa-ellipsis-v").addClass("fa-list")
+	}});
+	widthFunctions();
+	dropSidebarShadow();
+	init();
+	e(".sidebar").mmenu();
+	e('a[href="#"][data-top!=true]').click(function(e){e.preventDefault()})
+	});
+</script>
